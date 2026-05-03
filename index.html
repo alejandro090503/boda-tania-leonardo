@@ -605,27 +605,31 @@
       flex-direction: column;
       gap: 0;
       position: relative;
+      padding-left: 32px;
     }
 
-    /* Golden center line */
     .itin-line {
       position: absolute;
-      left: 50%;
+      left: 10px;
       top: 0;
-      width: 1px;
+      width: 2px;
       height: 0%;
       background: linear-gradient(180deg, var(--gold), var(--gold-light), var(--gold));
-      transform: translateX(-50%);
+      border-radius: 1px;
     }
 
     .itin-card {
       position: relative;
-      background: linear-gradient(145deg, rgba(232,67,147,0.08), rgba(232,67,147,0.03));
-      border: 1px solid rgba(232,67,147,0.15);
-      border-radius: 20px;
-      padding: 28px 24px;
-      margin-bottom: 20px;
-      backdrop-filter: blur(10px);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 0 16px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(251,207,232,.12);
+      border-radius: 24px;
+      padding: 28px 24px 28px 28px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(16px);
       opacity: 0;
       transform: translateY(40px) scale(0.95);
       overflow: hidden;
@@ -634,69 +638,70 @@
     .itin-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+      top: 28px;
+      left: -23px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--gold-dark);
+      box-shadow: 0 0 12px rgba(232,67,147,.4);
     }
 
     .itin-card::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(ellipse at center, rgba(232,67,147,0.05) 0%, transparent 50%);
+      inset: 0;
+      border-radius: 24px;
+      background: radial-gradient(ellipse at 0% 0%, rgba(232,67,147,.06) 0%, transparent 60%);
       pointer-events: none;
     }
 
     .itin-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      grid-row: 1 / 4;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(232,67,147,.15), rgba(232,67,147,.05));
+      border: 1px solid rgba(251,207,232,.18);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 20px rgba(232,67,147,0.3);
+      align-self: center;
     }
 
     .itin-icon svg {
-      width: 24px;
-      height: 24px;
-      color: #FFF0F8;
+      width: 26px;
+      height: 26px;
+      color: var(--gold-light);
     }
 
     .itin-time {
       font-family: var(--display);
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--gold);
+      font-size: 38px;
+      font-weight: 400;
       line-height: 1;
-      margin-bottom: 6px;
-      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-variant-numeric: tabular-nums;
     }
 
     .itin-event {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 400;
+      font-family: var(--script);
+      font-size: 24px;
       color: var(--crema);
-      margin-bottom: 6px;
+      line-height: 1.2;
     }
 
     .itin-desc {
       font-family: var(--sans);
       font-size: 12px;
-      color: rgba(251,207,232,0.5);
-      letter-spacing: 0.5px;
-      line-height: 1.6;
+      color: rgba(251,207,232,.5);
+      letter-spacing: .4px;
+      line-height: 1.7;
+      margin-top: 4px;
     }
 
     .itin-card-shine {
@@ -705,7 +710,7 @@
       left: -100%;
       width: 50%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(232,67,147,0.08), transparent);
+      background: linear-gradient(90deg, transparent, rgba(251,207,232,.06), transparent);
       pointer-events: none;
     }
 
@@ -2032,47 +2037,7 @@
       pointer-events: none;
     }
 
-    .itin-card .itin-time {
-      text-align: center;
-      font-size: 40px;
-      line-height: 1;
-      margin-bottom: 12px;
-      background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 55%, var(--gold-dark) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -.01em;
-    }
-
-    .itin-card .itin-event {
-      text-align: center;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 22px;
-      color: var(--crema);
-      letter-spacing: .2px;
-      margin-bottom: 10px;
-    }
-
-    .itin-card .itin-desc {
-      text-align: center;
-      font-size: 12px;
-      line-height: 1.7;
-      color: rgba(251,207,232,.66);
-      letter-spacing: .4px;
-      max-width: 280px;
-      margin: 0 auto;
-    }
-
-    /* Rosa decorativa sutil en esquina de la card */
-    .itin-card .itin-corner-rose {
-      position: absolute;
-      top: 12px; right: 14px;
-      width: 22px; height: 22px;
-      color: var(--gold-light);
-      opacity: .35;
-    }
+    .itin-card .itin-corner-rose { display: none; }
 
     /* ══════════════════════════════════════════════════════
        FAMILIA V2 — grupos elegantes con scripts
@@ -2749,6 +2714,9 @@
 
     <!-- ── 2. COUNTDOWN ────────────────────────────── -->
     <section id="cuenta" aria-label="Cuenta regresiva">
+      <div class="heart-nest hn-sm" style="top:15%;right:8%;transform:rotate(14deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-md" style="top:70%;left:-20px;transform:rotate(-18deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:85%;right:25%;transform:rotate(22deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
       <!-- nested hearts concéntricos centrados detrás del countdown -->
       <div class="heart-nest hn-xxl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
         <svg viewBox="0 0 200 186" fill="none" stroke="currentColor">
@@ -2788,6 +2756,10 @@
 
     <!-- ── 3. UBICACIÓN ────────────────────────────── -->
     <section id="ubicacion" aria-label="Lugares del evento">
+      <div class="heart-nest hn-sm" style="top:12%;left:5%;transform:rotate(-12deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-md" style="top:55%;right:-30px;transform:rotate(20deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:80%;left:20%;transform:rotate(-25deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:35%;right:10%;transform:rotate(8deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
       <div class="heart-nest hn-xxl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
         <svg viewBox="0 0 200 186" fill="none" stroke="currentColor">
           <path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.2"/>
@@ -2873,6 +2845,8 @@
 
     <!-- ── 4. GOOGLE CALENDAR ──────────────────────── -->
     <section id="calendar" aria-label="Agregar al calendario">
+      <div class="heart-nest hn-sm" style="top:20%;right:12%;transform:rotate(-15deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:75%;left:8%;transform:rotate(18deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
       <!-- nested hearts de fondo -->
       <div class="heart-nest hn-xxl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
         <svg viewBox="0 0 200 186" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -2915,6 +2889,10 @@
 
     <!-- ── 5. ITINERARIO — LUXURY REDESIGN ─────────── -->
     <section id="itinerario" aria-label="Itinerario de la boda">
+      <div class="heart-nest hn-sm on-dark" style="top:10%;left:5%;transform:rotate(12deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-md on-dark" style="top:45%;right:-25px;transform:rotate(-16deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm on-dark" style="top:80%;left:15%;transform:rotate(25deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm on-dark" style="top:60%;right:8%;transform:rotate(-8deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
 
       <div class="corner-decor tl" style="border-color: rgba(232,67,147,0.2)"></div>
       <div class="corner-decor tr" style="border-color: rgba(232,67,147,0.2)"></div>
@@ -2945,34 +2923,20 @@
 
         <div class="itin-card" role="listitem">
           <div class="itin-card-shine"></div>
-          <svg class="itin-corner-rose" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-            <circle cx="11" cy="11" r="2.2"/>
-            <circle cx="11" cy="11" r="4.2" opacity=".7"/>
-            <path d="M4 11 Q6 5 11 7" stroke-linecap="round"/>
-            <path d="M18 11 Q16 5 11 7" stroke-linecap="round"/>
-            <path d="M4 11 Q6 17 11 15" stroke-linecap="round"/>
-            <path d="M18 11 Q16 17 11 15" stroke-linecap="round"/>
-          </svg>
           <div class="itin-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M12 2 L12 6 M10 4 L14 4" stroke-linecap="round"/>
+              <rect x="3" y="6" width="18" height="14" rx="2"/>
+              <path d="M8 20 L8 13 Q12 11 16 13 L16 20"/>
             </svg>
           </div>
           <time class="itin-time" datetime="2026-10-24T15:00">15:00</time>
           <p class="itin-event">Ceremonia Religiosa</p>
-          <p class="itin-desc">El momento más sagrado: Tania y Leonardo unen sus vidas ante Dios en la Parroquia San Francisco</p>
+          <p class="itin-desc">Tania y Leonardo unen sus vidas ante Dios en la Parroquia San Francisco</p>
         </div>
 
         <div class="itin-card" role="listitem">
           <div class="itin-card-shine"></div>
-          <svg class="itin-corner-rose" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-            <circle cx="11" cy="11" r="2.2"/>
-            <circle cx="11" cy="11" r="4.2" opacity=".7"/>
-            <path d="M4 11 Q6 5 11 7" stroke-linecap="round"/>
-            <path d="M18 11 Q16 5 11 7" stroke-linecap="round"/>
-            <path d="M4 11 Q6 17 11 15" stroke-linecap="round"/>
-            <path d="M18 11 Q16 17 11 15" stroke-linecap="round"/>
-          </svg>
           <div class="itin-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
@@ -2980,13 +2944,16 @@
           </div>
           <time class="itin-time" datetime="2026-10-24T18:00">18:00</time>
           <p class="itin-event">Recepción</p>
-          <p class="itin-desc">Celebración, baile y alegría con los seres más queridos en el Hotel Holiday Inn</p>
+          <p class="itin-desc">Celebración y alegría con los seres más queridos en el Hotel Holiday Inn</p>
         </div>
       </div>
     </section>
 
     <!-- ── 6. DRESS CODE ───────────────────────────── -->
     <section id="dresscode" aria-label="Código de vestimenta">
+      <div class="heart-nest hn-sm" style="top:18%;left:10%;transform:rotate(-20deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:75%;right:15%;transform:rotate(15deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-md" style="top:40%;left:-25px;transform:rotate(10deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
 
       <!-- nested hearts fondo -->
       <div class="heart-nest hn-xl" style="top:50%;right:-100px;transform:translateY(-50%) rotate(15deg)" aria-hidden="true">
@@ -3057,6 +3024,9 @@
 
         <!-- ── 8. SIN NIÑOS ─────────────────────────────── -->
     <section id="kids-policy" aria-label="Aviso: solo adultos">
+      <div class="heart-nest hn-sm" style="top:15%;right:10%;transform:rotate(18deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:70%;left:5%;transform:rotate(-14deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-md" style="top:50%;right:-20px;transform:rotate(-22deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
 
       <!-- nested hearts kids-policy -->
       <div class="heart-nest hn-xxl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
@@ -3092,6 +3062,9 @@
 
     <!-- ── 9. MESA DE REGALOS ───────────────────────── -->
     <section id="gifts" aria-label="Mesa de regalos">
+      <div class="heart-nest hn-sm" style="top:12%;left:8%;transform:rotate(16deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:65%;right:12%;transform:rotate(-12deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-md" style="top:85%;left:-20px;transform:rotate(20deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
 
       <!-- nested hearts gifts bg -->
       <div class="heart-nest hn-xxl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
@@ -3141,6 +3114,9 @@
 
         <!-- ── 9. COMPARTIR INVITACIÓN ───────────────── -->
     <section id="rsvp" aria-label="Confirmación de asistencia">
+      <div class="heart-nest hn-sm" style="top:10%;right:5%;transform:rotate(-18deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:80%;left:10%;transform:rotate(14deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-md" style="top:45%;right:-25px;transform:rotate(22deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
 
       <!-- nested hearts RSVP -->
       <div class="heart-nest hn-xl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
