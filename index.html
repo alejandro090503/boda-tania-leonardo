@@ -2498,6 +2498,49 @@
     /* ══════════════════════════════════════════════════════
        RSVP FORM V2 — glass container
     ══════════════════════════════════════════════════════ */
+    /* ── Tarjeta invitado en hero ──────────────────── */
+    .guest-card {
+      display: none;
+      margin: 24px auto 0;
+      padding: 14px 24px 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-align: center;
+      max-width: 300px;
+    }
+    .guest-card.visible { display: block; }
+    .guest-card-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,240,248,.7);
+      margin-bottom: 4px;
+    }
+    .guest-card-name {
+      font-family: var(--script);
+      font-size: 26px;
+      color: #fff;
+      text-shadow: 0 1px 12px rgba(158,0,89,.4);
+      line-height: 1.2;
+    }
+    .guest-card-pases {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 8px;
+      padding: 4px 12px;
+      background: rgba(232,67,147,.25);
+      border-radius: 20px;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--gold-light);
+    }
+
     .rsvp-glass {
       max-width: 380px;
       margin: 32px auto 0;
@@ -2510,6 +2553,47 @@
         0 20px 56px -20px rgba(194,0,102,.2);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Estado confirmado */
+    .rsvp-confirmed {
+      display: none;
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+    .rsvp-confirmed-icon {
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .rsvp-confirmed-title {
+      font-family: var(--script);
+      font-size: 30px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .rsvp-confirmed-sub {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(80,20,50,.65);
+      letter-spacing: 1px;
+    }
+    /* Nombre del invitado dentro del RSVP */
+    .rsvp-guest-name {
+      font-family: var(--script);
+      font-size: 32px;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .rsvp-guest-pases {
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: rgba(80,20,50,.55);
+      text-align: center;
+      margin-bottom: 24px;
+      text-transform: uppercase;
     }
 
     /* ── REDUCED MOTION ──────────────────────────────── */
@@ -2615,6 +2699,13 @@
         <div class="hero-ornament-bottom" id="hero-orn-bottom" aria-hidden="true"></div>
         <p class="hero-date"  id="hero-date">24 · Octubre · MMXXVI</p>
         <p class="hero-city"  id="hero-city">Managua</p>
+
+        <!-- Tarjeta personalizada por invitado — visible solo si viene ?para= en la URL -->
+        <div class="guest-card fu" id="guest-card" aria-live="polite">
+          <p class="guest-card-label">Esta invitación es para</p>
+          <p class="guest-card-name" id="guest-card-name"></p>
+          <span class="guest-card-pases" id="guest-card-pases"></span>
+        </div>
       </div>
 
       <div class="hero-scroll" id="hero-scroll" aria-hidden="true">
@@ -3057,48 +3148,40 @@
       </div>
       <p class="label fu">Confírmanos tu asistencia</p>
       <h2 class="title rsvp-title fu">R<span class="rsvp-title-script">·</span>S<span class="rsvp-title-script">·</span>V<span class="rsvp-title-script">·</span>P</h2>
-      <p class="subtitle fu">Cuéntanos cuántos son y sus nombres</p>
+      <p class="subtitle fu">Tu presencia es el mejor regalo</p>
       <p class="fu" style="font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;opacity:.8;">Antes del 1 de agosto de 2026</p>
 
       <div class="rsvp-glass fu">
-      <form class="rsvp-form" id="rsvp-form" onsubmit="return false;" style="margin-top:0">
-        <div class="rsvp-stepper-wrap fu">
-          <span class="rsvp-stepper-label">Número de invitados</span>
-          <div class="rsvp-stepper" role="group" aria-label="Contador de invitados">
-            <button type="button" class="rsvp-step-btn" id="rsvp-dec" aria-label="Disminuir invitados">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="6" y1="12" x2="18" y2="12" stroke-linecap="round"/></svg>
-            </button>
-            <div class="rsvp-step-count" id="rsvp-count" aria-live="polite">1</div>
-            <button type="button" class="rsvp-step-btn" id="rsvp-inc" aria-label="Aumentar invitados">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <line x1="6" y1="12" x2="18" y2="12" stroke-linecap="round"/>
-                <line x1="12" y1="6" x2="12" y2="18" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
 
-        <div class="rsvp-names fu" id="rsvp-names" role="group" aria-label="Nombres de invitados">
-          <!-- Inputs dinámicos generados por JS -->
-        </div>
+        <!-- Nombre del invitado (se llena desde ?para= ) -->
+        <p class="rsvp-guest-name" id="rsvp-guest-name"></p>
+        <p class="rsvp-guest-pases" id="rsvp-guest-pases"></p>
 
+        <!-- Botón confirmar -->
         <button
           type="button"
-          id="btn-wa"
+          id="btn-confirmar"
           class="btn-rsvp fu"
-          aria-label="Confirmar asistencia por WhatsApp"
+          aria-label="Confirmar asistencia"
         >
           <span class="btn-rsvp-inner">
             <svg class="btn-rsvp-heart" viewBox="0 0 24 22" fill="currentColor" aria-hidden="true">
               <path d="M12 6.5 C14.2 1.5 22 1.5 22 9 C22 16.5 12 22 12 22 C12 22 2 16.5 2 9 C2 1.5 9.8 1.5 12 6.5 Z"/>
             </svg>
-            <span class="btn-rsvp-label">Confirmar asistencia</span>
+            <span class="btn-rsvp-label">¡Ahí estaremos!</span>
             <svg class="btn-rsvp-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
         </button>
-      </form>
+
+        <!-- Estado: confirmado -->
+        <div class="rsvp-confirmed" id="rsvp-confirmed">
+          <div class="rsvp-confirmed-icon">🌸</div>
+          <p class="rsvp-confirmed-title">¡Gracias!</p>
+          <p class="rsvp-confirmed-sub">Tu asistencia ha sido confirmada.<br>¡Los esperamos con alegría!</p>
+        </div>
+
       </div><!-- /rsvp-glass -->
     </section>
 
@@ -3946,6 +4029,63 @@
       setTimeout(function () { btn.textContent = orig; }, 2200);
     });
   });
+
+  /* ── Invitación personalizada + RSVP → Google Sheets ── */
+  (function () {
+    var APPS_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_APPS_SCRIPT';
+
+    var params  = new URLSearchParams(window.location.search);
+    var nombre  = params.get('para')  ? decodeURIComponent(params.get('para'))  : '';
+    var pases   = params.get('pases') ? parseInt(params.get('pases'), 10) : 0;
+
+    /* — Tarjeta en el hero — */
+    if (nombre) {
+      var card = document.getElementById('guest-card');
+      document.getElementById('guest-card-name').textContent = nombre;
+      document.getElementById('guest-card-pases').textContent =
+        pases ? pases + (pases === 1 ? ' pase' : ' pases') : '';
+      if (!pases) document.getElementById('guest-card-pases').style.display = 'none';
+      if (card) card.classList.add('visible');
+    }
+
+    /* — Nombre dentro del RSVP — */
+    var rsvpName  = document.getElementById('rsvp-guest-name');
+    var rsvpPases = document.getElementById('rsvp-guest-pases');
+    if (rsvpName)  rsvpName.textContent  = nombre || 'Estimado invitado';
+    if (rsvpPases) {
+      rsvpPases.textContent = pases ? pases + (pases === 1 ? ' pase asignado' : ' pases asignados') : '';
+      if (!pases) rsvpPases.style.display = 'none';
+    }
+
+    /* — Botón confirmar — */
+    var btn       = document.getElementById('btn-confirmar');
+    var confirmed = document.getElementById('rsvp-confirmed');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      btn.disabled = true;
+      btn.querySelector('.btn-rsvp-label').textContent = 'Enviando…';
+
+      var payload = {
+        nombre: nombre || 'Sin nombre',
+        pases:  pases  || 0,
+        fecha:  new Date().toLocaleDateString('es-NI', { day:'2-digit', month:'short', year:'numeric' }),
+        hora:   new Date().toLocaleTimeString('es-NI', { hour:'2-digit', minute:'2-digit' })
+      };
+
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .finally(function () {
+        btn.style.display = 'none';
+        if (confirmed) confirmed.style.display = 'block';
+        gsap.from(confirmed, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' });
+      });
+    });
+  }());
   </script>
 
 </body>
