@@ -2417,6 +2417,10 @@
     }
     .gift-btn-heart:active { transform: scale(.97); }
 
+    .heart-stroke-anim {
+      animation: heart-stroke 3.8s ease-in-out infinite;
+    }
+
     /* ══════════════════════════════════════════════════════
        NESTED HEARTS — corazón dentro de corazón dentro de corazón
     ══════════════════════════════════════════════════════ */
@@ -2592,6 +2596,138 @@
       font-style: italic;
       color: rgba(250,240,238,.35);
       letter-spacing: 1px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       KIDS POLICY V2 — nota poética editorial
+    ══════════════════════════════════════════════════════ */
+    .kids-poem-card-v2 {
+      position: relative;
+      max-width: 370px;
+      margin: 36px auto 0;
+      padding: 52px 32px 44px;
+      background: linear-gradient(150deg, rgba(255,248,248,.96) 0%, rgba(252,228,236,.9) 100%);
+      border: 1px solid rgba(232,67,147,.2);
+      border-radius: 28px;
+      box-shadow:
+        0 2px 4px rgba(158,0,89,.05),
+        0 24px 60px -20px rgba(194,0,102,.22),
+        inset 0 0 0 1px rgba(255,255,255,.6);
+      overflow: hidden;
+      text-align: center;
+    }
+    .kids-poem-card-v2::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 50%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .kids-poem-card-v2::after {
+      content: '"';
+      position: absolute;
+      top: -12px; left: 12px;
+      font-family: var(--serif);
+      font-size: 160px;
+      line-height: 1;
+      color: var(--accent);
+      opacity: .055;
+      pointer-events: none;
+      font-style: italic;
+    }
+    .kids-poem-body {
+      font-family: var(--serif);
+      font-size: 16.5px;
+      font-style: italic;
+      line-height: 1.95;
+      color: rgba(42,10,30,.7);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 26px;
+    }
+    .kids-poem-sig {
+      font-family: var(--script);
+      font-size: 30px;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+    .kids-poem-hr {
+      width: 44px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      border: none;
+      margin: 0 auto 16px;
+      opacity: .4;
+      position: relative; z-index: 1;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       GIFTS V2 — heart card más dramático
+    ══════════════════════════════════════════════════════ */
+    #gifts { overflow: hidden; }
+    .gifts-heart-scene {
+      position: relative;
+      max-width: 300px;
+      margin: 12px auto 0;
+    }
+    .gift-heart-v2 {
+      position: relative;
+      width: 300px;
+      height: 280px;
+      margin: 0 auto;
+      animation: heart-breathe 3.8s ease-in-out infinite;
+      transform-origin: center 55%;
+      filter: drop-shadow(0 6px 14px rgba(194,0,102,.28)) drop-shadow(0 22px 52px rgba(166,66,76,.3));
+    }
+    .gift-heart-v2-shape {
+      position: absolute;
+      inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .gift-heart-v2-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 55px 48px 80px;
+      text-align: center;
+      gap: 10px;
+    }
+    .genv2-icon { width: 44px; height: 44px; color: var(--accent); }
+    .genv2-icon svg { width: 100%; height: 100%; }
+    .genv2-title {
+      font-family: var(--script);
+      font-size: 28px;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .genv2-text {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(42,10,30,.62);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       RSVP FORM V2 — glass container
+    ══════════════════════════════════════════════════════ */
+    .rsvp-glass {
+      max-width: 380px;
+      margin: 32px auto 0;
+      padding: 36px 28px 32px;
+      background: linear-gradient(150deg, rgba(255,248,248,.92), rgba(252,228,236,.86));
+      border: 1px solid rgba(232,67,147,.2);
+      border-radius: 28px;
+      box-shadow:
+        0 2px 4px rgba(158,0,89,.04),
+        0 20px 56px -20px rgba(194,0,102,.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     /* ── REDUCED MOTION ──────────────────────────────── */
@@ -2982,6 +3118,16 @@
       <div class="corner-decor bl" style="border-color: rgba(232,67,147,0.2)"></div>
       <div class="corner-decor br" style="border-color: rgba(232,67,147,0.2)"></div>
 
+      <!-- nested hearts itinerario on-dark -->
+      <div class="heart-nest hn-xxl on-dark" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
+        <svg viewBox="0 0 200 186" fill="none" stroke="currentColor">
+          <path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/>
+          <path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/>
+          <path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/>
+          <path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/>
+        </svg>
+      </div>
+
       <svg class="rose-watermark on-dark md" style="top:12%;left:-30px;transform:rotate(-18deg)" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M50 84 C30 70 10 55 10 34 C10 22 20 13 31 13 C40 13 46 17 50 23 C54 17 60 13 69 13 C80 13 90 22 90 34 C90 55 70 70 50 84 Z"/></svg>
       <svg class="rose-watermark on-dark sm" style="bottom:14%;right:-20px;transform:rotate(22deg)" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 84 C30 70 10 55 10 34 C10 22 20 13 31 13 C40 13 46 17 50 23 C54 17 60 13 69 13 C80 13 90 22 90 34 C90 55 70 70 50 84 Z"/></svg>
       <p class="label fu" style="text-align:center;">El programa</p>
@@ -3135,27 +3281,35 @@
 
 
 
+      <!-- nested hearts kids-policy -->
+      <div class="heart-nest hn-xxl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
+        <svg viewBox="0 0 200 186" fill="none" stroke="currentColor">
+          <path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.3"/>
+          <path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1"/>
+          <path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".8"/>
+          <path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".6"/>
+        </svg>
+      </div>
+
       <p class="label fu">Aviso especial</p>
-      <h2 class="title fu">Una celebración <span style="font-family:var(--script);color:var(--accent);font-size:42px;">de</span> adultos</h2>
+      <h2 class="title fu">Solo <span style="font-family:var(--script);color:var(--accent);font-size:44px;">adultos</span></h2>
       <div class="rose-divider fu">
         <div class="rd-line"></div>
         <svg class="rd-rose" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M20 12c-2.5 0-4 1.8-4 3.8 0 1.6 1.2 2.9 2.8 3.2-1.6.3-2.8 1.6-2.8 3.2 0 2 1.5 3.8 4 3.8s4-1.8 4-3.8c0-1.6-1.2-2.9-2.8-3.2 1.6-.3 2.8-1.6 2.8-3.2 0-2-1.5-3.8-4-3.8z"/>
-          <path d="M20 8c-5 2-7 5-8 9" stroke-linecap="round"/>
-          <path d="M20 8c5 2 7 5 8 9" stroke-linecap="round"/>
-          <path d="M14 29c2 1 4 1.5 6 1.5s4-.5 6-1.5" stroke-linecap="round"/>
+          <circle cx="20" cy="20" r="4"/><circle cx="20" cy="20" r="2"/>
+          <path d="M12 20 Q15 13 20 16" stroke-linecap="round"/><path d="M28 20 Q25 13 20 16" stroke-linecap="round"/>
+          <path d="M12 20 Q15 27 20 24" stroke-linecap="round"/><path d="M28 20 Q25 27 20 24" stroke-linecap="round"/>
         </svg>
         <div class="rd-line"></div>
       </div>
-      <div class="kids-card fu">
-        <div class="kids-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-            <circle cx="32" cy="22" r="6"/>
-            <path d="M20 42c0-6 5-11 12-11s12 5 12 11v4H20z"/>
-            <line x1="14" y1="14" x2="50" y2="50" stroke-width="1.6"/>
-          </svg>
-        </div>
-        <p class="kids-text">Con todo el cariño, hemos decidido que nuestra celebración sea exclusivamente para adultos. Agradecemos profundamente tu comprensión y esperamos disfrutes una noche libre y a tu ritmo.</p>
+
+      <div class="kids-poem-card-v2 fu">
+        <p class="kids-poem-body">
+          Con todo nuestro cariño, hemos elegido que esta noche sea exclusivamente para adultos.<br><br>
+          Será una velada íntima, libre y llena de magia — y esperamos que la disfrutes a tu ritmo, sin preocupaciones.
+        </p>
+        <hr class="kids-poem-hr">
+        <span class="kids-poem-sig">Tania &amp; Leonardo</span>
       </div>
     </section>
 
@@ -3174,35 +3328,49 @@
 
 
 
+      <!-- nested hearts gifts bg -->
+      <div class="heart-nest hn-xxl" style="top:50%;left:50%;transform:translate(-50%,-50%)" aria-hidden="true">
+        <svg viewBox="0 0 200 186" fill="none" stroke="currentColor">
+          <path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.3"/>
+          <path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1"/>
+          <path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".8"/>
+          <path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".6"/>
+        </svg>
+      </div>
+
       <p class="label fu">Tu presencia es nuestro regalo</p>
       <h2 class="title fu">Lluvia <span style="font-family:var(--script);color:var(--accent);font-size:42px;">de</span> sobres</h2>
       <p class="gifts-sub fu">Si deseas obsequiarnos algo, con un sobre nos llenas el corazón</p>
 
-      <div class="gifts-hearts">
-        <article class="gift-heart-wrapper fu" style="max-width:260px;margin:0 auto;">
-          <div class="gift-heart">
-            <svg class="heart-shape" viewBox="0 0 280 260" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="heart-fill-1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#FFF0F8"/>
-                  <stop offset="100%" stop-color="#FEE2F0"/>
-                </linearGradient>
-              </defs>
-              <path d="M140 58 C158 18 228 18 228 80 C228 142 140 230 140 230 C140 230 52 142 52 80 C52 18 122 18 140 58 Z"
-                    fill="url(#heart-fill-1)" stroke="#E84393" stroke-width="1.6"/>
-            </svg>
-            <div class="heart-content">
-              <div class="gift-icon-sm" aria-hidden="true">
-                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="8" y="14" width="36" height="24" rx="3"/>
-                  <path d="M8 20 L26 31 L44 20" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div class="gift-name-sm fu">Lluvia de sobres</div>
-              <div class="gift-desc-sm fu">Tu generosidad nos ayuda a construir nuestro hogar</div>
+      <div class="gifts-heart-scene fu">
+        <div class="gift-heart-v2">
+          <!-- 5 corazones SVG anidados visibles -->
+          <svg class="gift-heart-v2-shape" viewBox="0 0 300 280" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="ghv2-fill" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FFF0F8"/>
+                <stop offset="100%" stop-color="#FEE2F0"/>
+              </linearGradient>
+            </defs>
+            <!-- relleno outer -->
+            <path d="M150 60 C170 16 248 16 248 84 C248 152 150 244 150 244 C150 244 52 152 52 84 C52 16 130 16 150 60Z" fill="url(#ghv2-fill)"/>
+            <!-- strokes concéntricos -->
+            <path d="M150 60 C170 16 248 16 248 84 C248 152 150 244 150 244 C150 244 52 152 52 84 C52 16 130 16 150 60Z" fill="none" stroke="#E84393" stroke-width="1.8" class="heart-stroke-anim"/>
+            <path d="M150 78 C167 38 230 38 230 92 C230 146 150 226 150 226 C150 226 70 146 70 92 C70 38 133 38 150 78Z" fill="none" stroke="#E84393" stroke-width="1.2" opacity=".55"/>
+            <path d="M150 96 C164 60 212 60 212 100 C212 140 150 208 150 208 C150 208 88 140 88 100 C88 60 136 60 150 96Z" fill="none" stroke="#E84393" stroke-width="1" opacity=".4"/>
+            <path d="M150 114 C161 82 194 82 194 108 C194 134 150 190 150 190 C150 190 106 134 106 108 C106 82 139 82 150 114Z" fill="none" stroke="#E84393" stroke-width=".8" opacity=".28"/>
+          </svg>
+          <div class="gift-heart-v2-content">
+            <div class="genv2-icon" aria-hidden="true">
+              <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="8" y="14" width="36" height="24" rx="3"/>
+                <path d="M8 20 L26 31 L44 20" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </div>
+            <p class="genv2-title">Lluvia de sobres</p>
+            <p class="genv2-text">Tu generosidad nos ayuda a construir nuestro hogar</p>
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
@@ -3235,7 +3403,8 @@
       <p class="subtitle fu">Cuéntanos cuántos son y sus nombres</p>
       <p class="fu" style="font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;opacity:.8;">Antes del 1 de agosto de 2026</p>
 
-      <form class="rsvp-form" id="rsvp-form" onsubmit="return false;">
+      <div class="rsvp-glass fu">
+      <form class="rsvp-form" id="rsvp-form" onsubmit="return false;" style="margin-top:0">
         <div class="rsvp-stepper-wrap fu">
           <span class="rsvp-stepper-label">Número de invitados</span>
           <div class="rsvp-stepper" role="group" aria-label="Contador de invitados">
@@ -3273,6 +3442,7 @@
           </span>
         </button>
       </form>
+      </div><!-- /rsvp-glass -->
     </section>
 
   </main>
