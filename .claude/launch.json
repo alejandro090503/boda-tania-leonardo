@@ -4,8 +4,8 @@
     {
       "name": "boda-preview",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "http-server", "C:/Users/aleja/boda-santiago-valentina", "-p", "4178", "-c-1", "--silent"],
-      "port": 4178
+      "runtimeArgs": ["--yes", "http-server", "C:/Users/aleja/boda-tania-leonardo", "-p", "4179", "-c-1", "--silent"],
+      "port": 4179
     }
   ]
 }
