@@ -817,131 +817,46 @@
        GALLERY — ANIMATED LUXURIOUS DESIGN
     ══════════════════════════════════════════════════════ */
     #galeria {
-      background: linear-gradient(180deg, var(--bg) 0%, var(--crema) 100%);
-      padding: 80px 0;
+      padding: 80px 24px;
+      overflow: visible;
+      text-align: center;
     }
 
-    #galeria .label,
-    #galeria .title,
-    #galeria .subtitle {
-      padding: 0 24px;
-    }
-
-    .gal-header-ornament {
-      width: 120px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto 20px;
-    }
-
-    /* Masonry-style grid */
-    .gal-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto;
-      gap: 6px;
-      padding: 0 16px;
-      margin-top: 32px;
-    }
-
-    .gal-item {
-      overflow: hidden;
-      border-radius: 12px;
+    .wheel-scene {
       position: relative;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(50px);
+      width: 100%;
+      height: 420px;
+      margin: 40px auto 0;
+      perspective: 800px;
+      transform-style: preserve-3d;
     }
 
-    /* Different heights for masonry effect */
-    .gal-item:nth-child(1) {
-      grid-column: 1 / -1;
+    .wheel-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    .wheel-card {
+      position: absolute;
+      width: 200px;
       height: 260px;
+      left: 50%;
+      top: 50%;
+      margin-left: -100px;
+      margin-top: -130px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid rgba(232,67,147,.2);
+      box-shadow: 0 8px 32px rgba(158,0,89,.15);
     }
 
-    .gal-item:nth-child(2) { height: 200px; }
-    .gal-item:nth-child(3) { height: 240px; }
-    .gal-item:nth-child(4) { height: 240px; }
-    .gal-item:nth-child(5) { height: 200px; }
-    .gal-item:nth-child(6) {
-      grid-column: 1 / -1;
-      height: 220px;
-    }
-
-    .gal-item img {
+    .wheel-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 1.2s cubic-bezier(.25,.46,.45,.94);
-    }
-
-    /* Hover overlay with golden gradient */
-    .gal-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        transparent 40%,
-        rgba(42,10,30,0.6) 100%
-      );
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      display: flex;
-      align-items: flex-end;
-      padding: 16px;
-    }
-
-    .gal-overlay-text {
-      font-family: var(--serif);
-      font-size: 14px;
-      font-style: italic;
-      color: var(--gold-light);
-      transform: translateY(10px);
-      transition: transform 0.5s ease;
-    }
-
-    .gal-item:hover img,
-    .gal-item:active img {
-      transform: scale(1.1);
-    }
-
-    .gal-item:hover .gal-overlay,
-    .gal-item:active .gal-overlay {
-      opacity: 1;
-    }
-
-    .gal-item:hover .gal-overlay-text,
-    .gal-item:active .gal-overlay-text {
-      transform: translateY(0);
-    }
-
-    /* Golden frame border on reveal */
-    .gal-item::after {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border: 1px solid rgba(232,67,147,0.3);
-      border-radius: 8px;
-      opacity: 0;
-      transition: opacity 0.6s ease 0.2s;
-      pointer-events: none;
-    }
-
-    .gal-item.revealed::after {
-      opacity: 1;
-    }
-
-    /* Shimmer effect on gallery items */
-    .gal-shimmer {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-      pointer-events: none;
-      z-index: 2;
     }
 
     /* Lightbox */
@@ -2672,10 +2587,8 @@
     <svg id="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
   </button>
 
-  <!-- Música de fondo vía YouTube IFrame API -->
-  <div id="yt-player-wrap" style="position:fixed;width:0;height:0;opacity:0;pointer-events:none;overflow:hidden;top:-1px;left:-1px" aria-hidden="true">
-    <div id="yt-player"></div>
-  </div>
+  <!-- Música de fondo — archivo local -->
+  <audio id="bg-audio" src="musica.mp3" preload="auto" loop></audio>
 
   <!-- ════════════════════════════════════
        MAIN CONTENT
@@ -2684,9 +2597,7 @@
 
     <!-- ── 1. HERO ─────────────────────────────────── -->
     <section id="hero" aria-label="Portada">
-      <video class="hero-bg" id="hero-bg" aria-hidden="true" autoplay loop muted playsinline preload="auto" poster="sobre.png">
-        <source src="hero-novios.mp4" type="video/mp4">
-      </video>
+      <img class="hero-bg" id="hero-bg" src="foto1.jpg" alt="" aria-hidden="true">
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-vignette" aria-hidden="true"></div>
 
@@ -3022,6 +2933,23 @@
       </div>
     </section>
 
+    <!-- ── 7. GALERÍA — Rueda de la Fortuna ──────── -->
+    <section id="galeria" aria-label="Galería de fotos">
+      <p class="label fu">Nuestra historia</p>
+      <h2 class="title fu">Galería</h2>
+      <p class="subtitle fu">Momentos que atesoramos</p>
+
+      <div class="wheel-scene" id="wheel-scene">
+        <div class="wheel-ring" id="wheel-ring">
+          <div class="wheel-card"><img src="foto1.jpg" alt="Tania y Leonardo" loading="lazy"></div>
+          <div class="wheel-card"><img src="foto2.jpg" alt="Tania y Leonardo" loading="lazy"></div>
+          <div class="wheel-card"><img src="foto3.jpg" alt="Tania y Leonardo" loading="lazy"></div>
+          <div class="wheel-card"><img src="foto4.jpg" alt="Tania y Leonardo" loading="lazy"></div>
+          <div class="wheel-card"><img src="foto5.jpg" alt="Tania y Leonardo" loading="lazy"></div>
+        </div>
+      </div>
+    </section>
+
         <!-- ── 8. SIN NIÑOS ─────────────────────────────── -->
     <section id="kids-policy" aria-label="Aviso: solo adultos">
       <div class="heart-nest hn-sm" style="top:15%;right:10%;transform:rotate(18deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
@@ -3212,53 +3140,33 @@
   <script>
   'use strict';
 
-  /* ── Música — YouTube IFrame API ────────────────── */
+  /* ── Música — archivo local (audio) ─────────────── */
   var musicBtn = document.getElementById('music-btn');
   var icoPlay  = document.getElementById('ico-play');
   var icoPause = document.getElementById('ico-pause');
+  var bgAudio  = document.getElementById('bg-audio');
   var _on      = false;
-  var ytPlayer = null;
-  var ytReady  = false;
-  var ytPending = false;
 
-  window.onYouTubeIframeAPIReady = function () {
-    ytPlayer = new YT.Player('yt-player', {
-      height: '0', width: '0',
-      videoId: 'nVUHHW1tJYA',
-      playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'nVUHHW1tJYA', rel: 0 },
-      events: {
-        onReady: function (e) {
-          ytReady = true;
-          e.target.setVolume(55);
-          if (ytPending) { e.target.playVideo(); ytPending = false; }
-        }
-      }
-    });
-  };
+  bgAudio.volume = 0.55;
 
-  (function () {
-    var tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-  })();
+  function startMusic() {
+    bgAudio.play().then(function () {
+      _on = true;
+      musicBtn.classList.add('playing');
+      icoPlay.style.display  = 'none';
+      icoPause.style.display = '';
+    }).catch(function () {});
+  }
 
   musicBtn.addEventListener('click', function () {
     if (_on) {
-      if (ytPlayer && ytReady) ytPlayer.pauseVideo();
+      bgAudio.pause();
       musicBtn.classList.remove('playing');
       icoPlay.style.display  = '';
       icoPause.style.display = 'none';
       _on = false;
     } else {
-      if (ytPlayer && ytReady) {
-        ytPlayer.playVideo();
-      } else {
-        ytPending = true;
-      }
-      musicBtn.classList.add('playing');
-      icoPlay.style.display  = 'none';
-      icoPause.style.display = '';
-      _on = true;
+      startMusic();
     }
   });
 
@@ -3317,6 +3225,7 @@
       scrollAnims();
       startCountdown();
       initUbicacionToggle();
+      startMusic();
     }
 
     function initUbicacionToggle() {
@@ -3817,6 +3726,34 @@
         }
       });
     });
+
+    /* Wheel of fortune gallery — 3D carousel on scroll */
+    (function () {
+      var cards = document.querySelectorAll('.wheel-card');
+      var ring  = document.getElementById('wheel-ring');
+      if (!ring || cards.length === 0) return;
+
+      var n = cards.length;
+      var angleStep = 360 / n;
+      var radius = 160;
+
+      cards.forEach(function (card, i) {
+        var angle = angleStep * i;
+        card.style.transform =
+          'rotateY(' + angle + 'deg) translateZ(' + radius + 'px)';
+      });
+
+      gsap.to(ring, {
+        rotateY: 360,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#galeria',
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: 1
+        }
+      });
+    })();
   }
 
   /* ── Lightbox ──────────────────────────────────── */
