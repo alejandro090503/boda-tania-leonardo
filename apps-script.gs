@@ -3,12 +3,13 @@
 //  Pega este código en script.google.com y despliega como Web App
 // ─────────────────────────────────────────────────────────────
 
-var SHEET_NAME = 'Confirmaciones';
+var SPREADSHEET_ID = '1kYt0BSQ6fQL5Cihs5cX0l2rwLGm1BWB-R7f9DAKQFC8';
+var SHEET_NAME     = 'Confirmaciones';
 
 function doPost(e) {
   try {
-    var data   = JSON.parse(e.postData.contents);
-    var sheet  = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+    var data   = JSON.parse(e.parameter.data || e.postData.contents);
+    var sheet  = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
 
     // Crear encabezados si la hoja está vacía
     if (sheet.getLastRow() === 0) {
