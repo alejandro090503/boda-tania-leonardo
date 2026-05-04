@@ -4073,14 +4073,12 @@
         hora:   new Date().toLocaleTimeString('es-NI', { hour:'2-digit', minute:'2-digit' })
       };
 
-      var form = new FormData();
-      form.append('data', JSON.stringify(payload));
+      var qs = '?nombre=' + encodeURIComponent(payload.nombre)
+             + '&pases='  + encodeURIComponent(payload.pases)
+             + '&fecha='  + encodeURIComponent(payload.fecha)
+             + '&hora='   + encodeURIComponent(payload.hora);
 
-      fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: form
-      })
+      fetch(APPS_SCRIPT_URL + qs, { method: 'GET', mode: 'no-cors' })
       .finally(function () {
         btn.style.display = 'none';
         if (confirmed) confirmed.style.display = 'block';
