@@ -817,13 +817,9 @@
        GALLERY — ANIMATED LUXURIOUS DESIGN
     ══════════════════════════════════════════════════════ */
     #galeria {
-      padding: 80px 24px 100px;
+      padding: 80px 24px;
       overflow: visible;
       text-align: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
     }
 
     .wheel-scene {
@@ -834,14 +830,6 @@
       perspective: 900px;
       transform-style: preserve-3d;
       overflow: visible;
-    }
-
-    .gal-hint {
-      font-size: .75rem;
-      letter-spacing: .12em;
-      color: rgba(139,99,102,.55);
-      margin-top: -4px;
-      margin-bottom: 8px;
     }
 
     .wheel-ring {
@@ -3124,8 +3112,7 @@
     <section id="galeria" aria-label="Galería de fotos">
       <p class="label fu">Nuestra historia</p>
       <h2 class="title fu">Galería</h2>
-      <p class="subtitle fu">Momentos que atesoramos</p>
-      <p class="gal-hint fu">↕ Sigue scrolleando · ↔ Arrastra para girar</p>
+      <p class="subtitle fu">Momentos que atesoramos · arrastra para girar</p>
 
       <div class="wheel-scene" id="wheel-scene">
         <div class="wheel-ring" id="wheel-ring">
@@ -3953,68 +3940,79 @@
       });
     });
 
-    /* Wheel of fortune gallery — 3D carousel: scroll + drag/swipe */
+    /* Galería — carrusel 3D: solo arrastre/swipe, sin scroll */
     (function () {
       var cards = document.querySelectorAll('.wheel-card');
       var ring  = document.getElementById('wheel-ring');
       if (!ring || cards.length === 0) return;
 
-      var n         = cards.length;
-      var radius    = 280;
-      var scrollRot = 0;
-      var dragRot   = 0;
-      var isDrag    = false;
-      var startX    = 0;
-      var startDrag = 0;
+      var n      = cards.length;
+      var radius = 280;
+      var rot    = 0;        /* rotación actual en grados */
+      var vel    = 0;        /* inercia */
+      var isDrag = false;
+      var startX = 0;
+      var startRot = 0;
+      var lastX  = 0;
+      var rafId  = null;
 
       /* posicionar cards en el círculo */
       cards.forEach(function (card, i) {
         card.style.transform = 'rotateY(' + (360 / n * i) + 'deg) translateZ(' + radius + 'px)';
       });
 
-      function applyRotation() {
-        gsap.set(ring, { rotateY: scrollRot + dragRot });
+      function setRot(r) {
+        rot = r;
+        gsap.set(ring, { rotateY: rot });
       }
 
-      /* ScrollTrigger — pinea la galería y gira el carrusel con el scroll */
-      gsap.to({}, {
-        scrollTrigger: {
-          trigger: '#galeria',
-          start: 'top top',
-          end: '+=1400',
-          pin: true,
-          scrub: 1.2,
-          onUpdate: function (self) {
-            scrollRot = self.progress * 360;
-            if (!isDrag) applyRotation();
-          }
-        }
-      });
+      /* inercia suave al soltar */
+      function inertia() {
+        if (Math.abs(vel) < 0.05) { vel = 0; return; }
+        vel *= 0.94;
+        setRot(rot + vel);
+        rafId = requestAnimationFrame(inertia);
+      }
 
-      /* Drag — mouse */
+      /* — Mouse — */
       ring.addEventListener('mousedown', function (e) {
-        isDrag = true; startX = e.clientX; startDrag = dragRot;
+        cancelAnimationFrame(rafId);
+        isDrag = true; vel = 0;
+        startX = e.clientX; startRot = rot; lastX = e.clientX;
         ring.classList.add('dragging');
       });
       window.addEventListener('mousemove', function (e) {
         if (!isDrag) return;
-        dragRot = startDrag + (startX - e.clientX) * 0.45;
-        applyRotation();
+        var dx = e.clientX - startX;        /* arrastre derecha → dx positivo → imágenes van a la derecha */
+        vel = (e.clientX - lastX) * 0.5;
+        lastX = e.clientX;
+        setRot(startRot + dx * 0.45);
       });
       window.addEventListener('mouseup', function () {
-        isDrag = false; ring.classList.remove('dragging');
+        if (!isDrag) return;
+        isDrag = false;
+        ring.classList.remove('dragging');
+        rafId = requestAnimationFrame(inertia);
       });
 
-      /* Drag — touch */
+      /* — Touch — */
       ring.addEventListener('touchstart', function (e) {
-        isDrag = true; startX = e.touches[0].clientX; startDrag = dragRot;
+        cancelAnimationFrame(rafId);
+        isDrag = true; vel = 0;
+        startX = e.touches[0].clientX; startRot = rot; lastX = startX;
       }, { passive: true });
       window.addEventListener('touchmove', function (e) {
         if (!isDrag) return;
-        dragRot = startDrag + (startX - e.touches[0].clientX) * 0.45;
-        applyRotation();
+        var dx = e.touches[0].clientX - startX;
+        vel = (e.touches[0].clientX - lastX) * 0.5;
+        lastX = e.touches[0].clientX;
+        setRot(startRot + dx * 0.45);
       }, { passive: true });
-      window.addEventListener('touchend', function () { isDrag = false; });
+      window.addEventListener('touchend', function () {
+        if (!isDrag) return;
+        isDrag = false;
+        rafId = requestAnimationFrame(inertia);
+      });
     })();
   }
 
