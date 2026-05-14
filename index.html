@@ -817,9 +817,13 @@
        GALLERY — ANIMATED LUXURIOUS DESIGN
     ══════════════════════════════════════════════════════ */
     #galeria {
-      padding: 80px 24px;
+      padding: 80px 24px 100px;
       overflow: visible;
       text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .wheel-scene {
@@ -830,6 +834,14 @@
       perspective: 900px;
       transform-style: preserve-3d;
       overflow: visible;
+    }
+
+    .gal-hint {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      color: rgba(139,99,102,.55);
+      margin-top: -4px;
+      margin-bottom: 8px;
     }
 
     .wheel-ring {
@@ -3113,6 +3125,7 @@
       <p class="label fu">Nuestra historia</p>
       <h2 class="title fu">Galería</h2>
       <p class="subtitle fu">Momentos que atesoramos</p>
+      <p class="gal-hint fu">↕ Sigue scrolleando · ↔ Arrastra para girar</p>
 
       <div class="wheel-scene" id="wheel-scene">
         <div class="wheel-ring" id="wheel-ring">
@@ -3963,13 +3976,14 @@
         gsap.set(ring, { rotateY: scrollRot + dragRot });
       }
 
-      /* ScrollTrigger — avanza el carrusel al bajar */
+      /* ScrollTrigger — pinea la galería y gira el carrusel con el scroll */
       gsap.to({}, {
         scrollTrigger: {
           trigger: '#galeria',
-          start: 'top 80%',
-          end: 'bottom 20%',
-          scrub: 1,
+          start: 'top top',
+          end: '+=1400',
+          pin: true,
+          scrub: 1.2,
           onUpdate: function (self) {
             scrollRot = self.progress * 360;
             if (!isDrag) applyRotation();
