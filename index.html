@@ -825,10 +825,11 @@
     .wheel-scene {
       position: relative;
       width: 100%;
-      height: 420px;
+      height: 520px;
       margin: 40px auto 0;
-      perspective: 800px;
+      perspective: 900px;
       transform-style: preserve-3d;
+      overflow: visible;
     }
 
     .wheel-ring {
@@ -836,28 +837,34 @@
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
+      cursor: grab;
     }
+    .wheel-ring.dragging { cursor: grabbing; }
 
     .wheel-card {
       position: absolute;
-      width: 110px;
-      height: 150px;
+      width: 160px;
+      height: 220px;
       left: 50%;
       top: 50%;
-      margin-left: -55px;
-      margin-top: -75px;
-      border-radius: 14px;
+      margin-left: -80px;
+      margin-top: -110px;
+      border-radius: 18px;
       overflow: hidden;
-      border: 2px solid rgba(176,116,120,.2);
-      box-shadow: 0 8px 32px rgba(139,99,102,.15);
+      border: 2px solid rgba(176,116,120,.25);
+      box-shadow: 0 12px 40px rgba(139,99,102,.2);
+      user-select: none;
+      -webkit-user-select: none;
     }
-
     .wheel-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
+      pointer-events: none;
     }
+
 
     /* Lightbox */
     .lightbox {
@@ -3933,32 +3940,67 @@
       });
     });
 
-    /* Wheel of fortune gallery — 3D carousel on scroll */
+    /* Wheel of fortune gallery — 3D carousel: scroll + drag/swipe */
     (function () {
       var cards = document.querySelectorAll('.wheel-card');
       var ring  = document.getElementById('wheel-ring');
       if (!ring || cards.length === 0) return;
 
-      var n = cards.length;
-      var angleStep = 360 / n;
-      var radius = 200;
+      var n         = cards.length;
+      var radius    = 280;
+      var scrollRot = 0;
+      var dragRot   = 0;
+      var isDrag    = false;
+      var startX    = 0;
+      var startDrag = 0;
 
+      /* posicionar cards en el círculo */
       cards.forEach(function (card, i) {
-        var angle = angleStep * i;
-        card.style.transform =
-          'rotateY(' + angle + 'deg) translateZ(' + radius + 'px)';
+        card.style.transform = 'rotateY(' + (360 / n * i) + 'deg) translateZ(' + radius + 'px)';
       });
 
-      gsap.to(ring, {
-        rotateY: 360,
-        ease: 'none',
+      function applyRotation() {
+        gsap.set(ring, { rotateY: scrollRot + dragRot });
+      }
+
+      /* ScrollTrigger — avanza el carrusel al bajar */
+      gsap.to({}, {
         scrollTrigger: {
           trigger: '#galeria',
           start: 'top 80%',
           end: 'bottom 20%',
-          scrub: 1
+          scrub: 1,
+          onUpdate: function (self) {
+            scrollRot = self.progress * 360;
+            if (!isDrag) applyRotation();
+          }
         }
       });
+
+      /* Drag — mouse */
+      ring.addEventListener('mousedown', function (e) {
+        isDrag = true; startX = e.clientX; startDrag = dragRot;
+        ring.classList.add('dragging');
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!isDrag) return;
+        dragRot = startDrag + (startX - e.clientX) * 0.45;
+        applyRotation();
+      });
+      window.addEventListener('mouseup', function () {
+        isDrag = false; ring.classList.remove('dragging');
+      });
+
+      /* Drag — touch */
+      ring.addEventListener('touchstart', function (e) {
+        isDrag = true; startX = e.touches[0].clientX; startDrag = dragRot;
+      }, { passive: true });
+      window.addEventListener('touchmove', function (e) {
+        if (!isDrag) return;
+        dragRot = startDrag + (startX - e.touches[0].clientX) * 0.45;
+        applyRotation();
+      }, { passive: true });
+      window.addEventListener('touchend', function () { isDrag = false; });
     })();
   }
 
