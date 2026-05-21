@@ -904,6 +904,43 @@
       z-index: 10;
     }
 
+    /* ── ÁLBUM DE FOTOS ──────────────────────────────── */
+    #album {
+      padding: 80px 24px;
+      text-align: center;
+      background: rgba(250,240,238,.78);
+    }
+    .album-qr-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 32px;
+      gap: 16px;
+    }
+    .album-qr-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 8px 40px rgba(139,99,102,.15);
+      border: 1px solid rgba(176,116,120,.18);
+      display: inline-flex;
+    }
+    .album-qr-img {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
+    }
+    .album-qr-hint {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: .7;
+    }
+
     /* ── RSVP ────────────────────────────────────────── */
     #rsvp {
       background: linear-gradient(145deg, var(--surface), var(--crema));
@@ -3261,7 +3298,29 @@
 
     </section>
 
-        <!-- ── 9. COMPARTIR INVITACIÓN ───────────────── -->
+    <!-- ── 10. ÁLBUM DE FOTOS ───────────────────────── -->
+    <section id="album" aria-label="Álbum de fotos">
+      <div class="heart-nest hn-sm" style="top:10%;left:6%;transform:rotate(18deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+      <div class="heart-nest hn-sm" style="top:75%;right:8%;transform:rotate(-15deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
+
+      <p class="label fu">Comparte tus momentos</p>
+      <h2 class="title fu">Álbum de Fotos</h2>
+      <div class="ornament-divider fu">
+        <div class="line"></div>
+        <div class="diamond"></div>
+        <div class="line"></div>
+      </div>
+      <p class="subtitle fu">Comparte fotos con nosotros</p>
+
+      <div class="album-qr-wrap fu">
+        <div class="album-qr-card">
+          <img src="qr-album.png" alt="QR álbum compartido" class="album-qr-img">
+        </div>
+        <p class="album-qr-hint">Escanea el código con tu cámara</p>
+      </div>
+    </section>
+
+        <!-- ── 11. COMPARTIR INVITACIÓN ───────────────── -->
     <section id="rsvp" aria-label="Confirmación de asistencia">
       <div class="heart-nest hn-sm" style="top:10%;right:5%;transform:rotate(-18deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
       <div class="heart-nest hn-sm" style="top:80%;left:10%;transform:rotate(14deg)" aria-hidden="true"><svg viewBox="0 0 200 186" fill="none" stroke="currentColor"><path d="M100 174 C38 134 4 90 4 52 C4 24 24 4 52 4 C70 4 85 14 100 30 C115 14 130 4 148 4 C176 4 196 24 196 52 C196 90 162 134 100 174Z" stroke-width="1.4"/><path d="M100 150 C52 116 24 79 24 52 C24 34 38 20 56 20 C73 20 85 28 100 46 C115 28 127 20 144 20 C162 20 176 34 176 52 C176 79 148 116 100 150Z" stroke-width="1.1"/><path d="M100 126 C66 98 44 74 44 52 C44 38 54 28 68 28 C81 28 91 36 100 52 C109 36 119 28 132 28 C146 28 156 38 156 52 C156 74 134 98 100 126Z" stroke-width=".9"/><path d="M100 100 C79 81 64 64 64 52 C64 43 70 36 80 36 C89 36 95 41 100 50 C105 41 111 36 120 36 C130 36 136 43 136 52 C136 64 121 81 100 100Z" stroke-width=".7"/></svg></div>
