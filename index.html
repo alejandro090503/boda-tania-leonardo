@@ -2932,7 +2932,7 @@
           <h3 class="loc-panel-name">Parroquia San Francisco</h3>
           <p class="loc-panel-city">Managua, Nicaragua</p>
           <div class="loc-panel-time-wrap">
-            <span class="loc-panel-time">15:00</span>
+            <span class="loc-panel-time">14:30</span>
             <span class="loc-panel-time-lbl">de la tarde</span>
           </div>
           <div class="loc-map-wrap">
@@ -2992,7 +2992,7 @@
         </div>
 
         <a
-          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Tania+%26+Leonardo&dates=20261024T150000%2F20261024T235900&details=Ceremonia+Religiosa+en+Parroquia+San+Francisco+(15%3A00+hrs)+%7C+Recepci%C3%B3n+en+Hotel+Holiday+Inn+(18%3A00+hrs)&location=Parroquia+San+Francisco%2C+Managua"
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Tania+%26+Leonardo&dates=20261024T143000%2F20261024T235900&details=Ceremonia+Religiosa+en+Parroquia+San+Francisco+(14%3A30+hrs)+%7C+Recepci%C3%B3n+en+Hotel+Holiday+Inn+(18%3A00+hrs)&location=Parroquia+San+Francisco%2C+Managua"
           target="_blank" rel="noopener noreferrer"
           class="btn-cal"
           aria-label="Agregar la boda de Tania y Leonardo a Google Calendar"
@@ -3053,7 +3053,7 @@
               <path d="M8 20 L8 13 Q12 11 16 13 L16 20"/>
             </svg>
           </div>
-          <time class="itin-time" datetime="2026-10-24T15:00">15:00</time>
+          <time class="itin-time" datetime="2026-10-24T14:30">14:30</time>
           <p class="itin-event">Ceremonia Religiosa</p>
           <p class="itin-desc">Tania y Leonardo unen sus vidas ante Dios en la Parroquia San Francisco</p>
         </div>
@@ -4111,7 +4111,7 @@
 
   /* ── countdown ─────────────────────────────────── */
   function startCountdown() {
-    var target = new Date('2026-10-24T15:00:00-06:00');
+    var target = new Date('2026-10-24T14:30:00-06:00');
 
     function pad(n, len) { return String(n).padStart(len, '0'); }
 
@@ -4235,7 +4235,7 @@
         'Con todo nuestro amor, *Tania & Leonardo* les invitan a ser parte del día más especial de nuestras vidas. 💍\n\n' +
         guestLine + '\n\n' +
         '📅 *24 de Octubre de 2026*\n' +
-        '⛪ Ceremonia · Parroquia San Francisco · Managua · 15:00 hrs\n' +
+        '⛪ Ceremonia · Parroquia San Francisco · Managua · 14:30 hrs\n' +
         '🥂 Recepción · Hotel Holiday Inn · Managua · 18:00 hrs\n\n' +
         '✨ Abre tu invitación aquí:\n' + siteUrl + '\n\n' +
         'Con todo nuestro cariño,\n*Tania & Leonardo* 💕';
@@ -4338,5 +4338,33 @@
   }
   </script>
 
+<script>
+/* ELYSIUM AUDIO UNLOCK v1 — la musica se estrena DENTRO del primer gesto real del invitado.
+   iOS/Chrome retiran el permiso del gesto a los pocos ms, asi que un play() que corre al
+   terminar el video del sobre llega tarde y es rechazado en silencio. */
+(function(){
+  if(window.__elyAudioUnlock) return; window.__elyAudioUnlock=1;
+  var done=false, tries=0;
+  function A(){ return document.querySelector('audio'); }
+  function unlock(){
+    if(done) return;
+    var a=A(); if(!a) return;
+    try{ if(a.preload==='none'){ a.preload='auto'; a.load(); } }catch(e){}
+    if(!a.paused){ done=true; return; }
+    var p;
+    try{ p=a.play(); }catch(e){ return; }
+    if(p && p.then){ p.then(function(){ done=true; }).catch(function(){}); }
+    else { done=true; }
+  }
+  ['pointerdown','touchstart','touchend','click','keydown'].forEach(function(ev){
+    document.addEventListener(ev, unlock, {capture:true, passive:true});
+  });
+  var iv=setInterval(function(){
+    var a=A();
+    if(done || (a && !a.paused)){ done=true; clearInterval(iv); return; }
+    if(++tries>120) clearInterval(iv);
+  },1000);
+})();
+</script>
 </body>
 </html>
